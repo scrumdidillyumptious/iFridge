@@ -8,8 +8,11 @@ body {
 }
 
 table {
-        width: 100% !important; 
+        width: 50% !important; 
 		margin: auto;
+		overflow-x: auto;
+		overflow-y: auto;
+		display: inline-block;
     }
 
 thead, tbody, tr, td, th { display: block; }
@@ -27,7 +30,7 @@ thead th {
 }
 
 tbody {
-    height: 120px;
+    height: 450px;
     overflow-y: auto;
 	text-align: center;
 
@@ -39,8 +42,10 @@ thead {
 
 
 tbody td, thead th {
-    width: 25%;
+    width: 50%;
     float: left;	
+	text-align: center;
+
 }
 
 
@@ -75,8 +80,8 @@ tbody td, thead th {
 
 /* Carousel base class */
 .carousel {
-  height: 500px;
-  margin-bottom: 60px;
+  height: 950px;
+  margin-bottom: -50px;
 }
 /* Since positioning the image, we need to help out the caption */
 .carousel-caption {
@@ -85,7 +90,7 @@ tbody td, thead th {
 
 /* Declare heights because of positioning of img element */
 .carousel .item {
-  height: 500px;
+  height: 950px;
   background-color: #777;
 }
 .carousel-inner > .item > img {
@@ -93,14 +98,14 @@ tbody td, thead th {
   top: 0;
   left: 0;
   min-width: 100%;
-  height: 500px;
+  height: 100px;
 }
 
 
 /* MARKETING CONTENT
--------------------------------------------------- */
+-------------------------------------------------- 
 
-/* Center align the text within the three columns below the carousel */
+/* Center align the text within the three columns below the carousel 
 .marketing .col-lg-4 {
   margin-bottom: 20px;
   text-align: center;
@@ -112,6 +117,7 @@ tbody td, thead th {
   margin-right: 10px;
   margin-left: 10px;
 }
+*/
 
 
 /* Featurettes
