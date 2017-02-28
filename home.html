@@ -8,19 +8,23 @@
     <meta name="description" content="">
     <meta name="author" content="">
 	<?php
-$servername = "localhost";
-$username = "username";
-$password = "password";
+		$servername = "localhost";
+		$username = "username";
+		$password = "password";
 
-// Create connection
-$conn = new mysqli($servername, $username, $password);
+		// Create connection
+		$conn = new mysqli($servername, $username, $password);
 
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-} 
-echo "Connected successfully";
-?>
+		// Check connection
+		if ($conn->connect_error) {
+			die("Connection failed: " . $conn->connect_error);
+		} 
+		echo "Connected successfully";
+
+		$itemsQuery = mysql_query("select * from ingredients");
+
+	?>
+	
     <link rel="icon" href="../../favicon.ico">
 
     <title>Carousel Template for Bootstrap</title>
@@ -103,12 +107,25 @@ echo "Connected successfully";
               <p>
 				<table class="table table-responsive">
 					<thead class="thead-inverse">
-						<tr>
+						<tr class = "header">
 							<th>Item</th>
 							<th>Expiration</th>
 						</tr>
 					</thead>
 					<tbody>
+						<?php
+							$i = 0;
+							while ($row = mysql_fetch_array($itemsQuery)) {
+								$class = ($i == 0) ? "" : "alt";
+								echo "<tr class=\"".$class."\">";
+								echo "<td>".$row[iname]."</td>";
+								echo "<td>".$row[expDate]."</td>";
+								echo "</tr>";
+								$i = ($i==0) ? 1:0;
+							}
+
+						?>
+						
 						<tr>
 							<td>Milk</td>
 							<td>2/20/17</td>
