@@ -53,30 +53,58 @@
 	      <form class="form-signin">
 	        <h2 class="form-signin-heading">Please sign in</h2>
 	        <label for="inputEmail" class="sr-only">Email address</label>
-	        <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+	        <input name="emailBox" type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
 	        <label for="inputPassword" class="sr-only">Password</label>
-	        <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+	        <input name="passwordBox" type="password" id="inputPassword" class="form-control" placeholder="Password" required>
 	        <div class="checkbox">
 	          <label>
 	            <input type="checkbox" value="remember-me"> Remember me
 	          </label>
 	        </div>
-	        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+	        <button class="btn btn-lg btn-primary btn-block" type="button" onclick="formHandler();">Sign in</button>
 	      </form>
 
 	    </div>
 	    <div class="col-md-4"></div>
    	</div>
 
+   	<script type="text/JavaScript">
+   		$(document).ready(function(){
+   			alert("hey");
+   		});
+
+   		function formHandler(){
+
+   			var dataArray = $('form').serializeArray(), dataObj = {};
+
+   			$(dataArray).each(function(i, field){
+   				dataObj[field.name] = field.value;
+   			});
+
+   			//alert(dataObj['emailBox']);     //print input email
+   			//alert(dataObj['passwordBox']);  //print input password
+
+   			//send input email to database (dataObj['emailBox']), return correctPass
+   			var correctPass = ""; //database connection here to return registered password
+
+   			if(dataObj['passwordBox'] == correctPass){
+   				window.location = "home.html";
+   			}
+   			else{
+   				window.location = "login.html";
+   			}
+
+   		}
+
+   	</script>
+
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
 	<script src="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.6/bootstrap.min.js"</script>
     <!--<script src="../../dist/js/bootstrap.min.js"></script>-->
-    <!-- Just to make our placeholder images work. Don't actually copy the next line! -->
-    <script src="../../assets/js/vendor/holder.min.js"></script>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
   </body>
