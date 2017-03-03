@@ -105,7 +105,7 @@ echo "Connected successfully";
               <h1>What's In Your Fridge?</h1>
               <p>
 				<table id=ingTable class="table table-responsive">
-					<thead class="thead-inverse">
+++++++++++++-					<thead class="thead-inverse">
 						<tr class = "header">
 							<th>Item</th>
 							<th>Expiration</th>
@@ -155,70 +155,25 @@ echo "Connected successfully";
 						</tr>
 					</thead>
 					<tbody>
-						<tr>
-							<td>Milk and Cereal</td>
-							<td>1</td>
-						</tr>
-						<tr>
-							<td>Chicken and Pasta</td>
-							<td>2.5</td>
-						</tr>
-						<tr>
-							<td>PB&J</td>
-							<td>1</td>
-						</tr>
-						<tr>
-							<td>Blueberry Pancakes</td>
-							<td>2</td>
-						</tr>
-						<tr>
-							<td>Steak and Potatoes</td>
-							<td>3</td>
-						</tr>
-						<tr>
-							<td>Crystal Meth</td>
-							<td>5</td>
-						</tr>
-						<tr>
-							<td>Turkey Dinner</td>
-							<td>4</td>
-						</tr>
-						<tr>
-							<td>Ravioli</td>
-							<td>3</td>
-						</tr>
-						<tr>
-							<td>The Krabby Patty Secret Formula</td>
-							<td>5</td>
-						</tr>
-						<tr>
-							<td>Tuna Fish</td>
-							<td>1.5</td>
-						</tr>
-						<tr>
-							<td>Caeser Salad</td>
-							<td>2</td>
-						</tr>
-						<tr>
-							<td>Pork and Beans</td>
-							<td>3</td>
-						</tr>
-						<tr>
-							<td>Spaghetti</td>
-							<td>2</td>
-						</tr>
-						<tr>
-							<td>Chocolate Milkshake</td>
-							<td>1.5</td>
-						</tr>
-						<tr>
-							<td>Fish Taco</td>
-							<td>2.5</td>
-						</tr>
-						<tr>
-							<td>Apple Pie</td>
-							<td>3.5</td>
-						</tr>
+            <?php
+          $sql = "SELECT rname, difficulty FROM recipie ";
+          $result = mysqli_query($conn, $sql);
+          $i = 0;
+          if (mysqli_num_rows($result) > 0) {
+              // output data of each row
+              while($row = mysqli_fetch_assoc($result)) {
+                  $class = ($i == 0) ? "" : "alt";
+              echo "<tr class=\" ".$class." \">";
+              echo "<td>".$row["rname"]."</td>";
+              echo "<td>".$row["difficulty"]."</td>";
+              echo "</tr>";
+              $i = ($i==0) ? 1:0;
+              }
+          } else {
+              echo "0 results";
+          }
+
+          ?>
 					</tbody>
 				</table>
 			  </p>
