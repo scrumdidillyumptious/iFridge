@@ -105,7 +105,7 @@ echo "Connected successfully";
               <h1>What's In Your Fridge?</h1>
               <p>
 				<table id=ingTable class="table table-responsive">
-++++++++++++-					<thead class="thead-inverse">
+				<thead class="thead-inverse">
 						<tr class = "header">
 							<th>Item</th>
 							<th>Expiration</th>
