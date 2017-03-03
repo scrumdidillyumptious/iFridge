@@ -61,7 +61,7 @@
 	            <input type="checkbox" value="remember-me"> Remember me
 	          </label>
 	        </div>
-	        <button class="btn btn-lg btn-primary btn-block" type="button" onclick="formHandler();">Sign in</button>
+	        <button class="btn btn-lg btn-primary btn-block" type="submit" onclick="formHandler();">Sign in</button>
 	      </form>
 
 	    </div>
@@ -85,12 +85,13 @@
    			//alert(dataObj['passwordBox']);  //print input password
 
    			//send input email to database (dataObj['emailBox']), return correctPass
-   			var correctPass = ""; //database connection here to return registered password
+   			var correctPass = "readCorrectPasswordFromDatabase"; //database connection here to return registered password
 
    			if(dataObj['passwordBox'] == correctPass){
    				window.location = "home.html";
    			}
    			else{
+   				alert("Password Incorrect");
    				window.location = "login.html";
    			}
 
