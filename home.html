@@ -18,13 +18,13 @@
 		// Check connection
 		if ($conn->connect_error) {
 			die("Connection failed: " . $conn->connect_error);
-		} 
+		}
 		echo "Connected successfully";
 
 		$itemsQuery = mysql_query("select * from ingredients");
 
 	?>
-	
+
     <link rel="icon" href="../../favicon.ico">
 
     <title>Carousel Template for Bootstrap</title>
@@ -33,14 +33,14 @@
     <link href="Bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]> 
+    <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 
     <!-- Custom styles for this template -->
     <link href="carousel2.css" rel="stylesheet">
-	
+
   </head>
 <!-- NAVBAR
 ================================================== -->
@@ -113,38 +113,32 @@
 						</tr>
 					</thead>
 					<tbody>
-						<?php
-							$i = 0;
-							while ($row = mysql_fetch_array($itemsQuery)) {
-								$class = ($i == 0) ? "" : "alt";
-								echo "<tr class=\"".$class."\">";
-								echo "<td>".$row[iname]."</td>";
-								echo "<td>".$row[expDate]."</td>";
-								echo "</tr>";
-								$i = ($i==0) ? 1:0;
-							}
+            <?php
+          $sql = "SELECT iname, expDate FROM ingredients";
+          $result = mysqli_query($conn, $sql);
+          $i = 0;
+          if (mysqli_num_rows($result) > 0) {
+              // output data of each row
+              while($row = mysqli_fetch_assoc($result)) {
+                  $class = ($i == 0) ? "" : "alt";
+              echo "<tr class=\" ".$class." \">";
+              echo "<td>".$row["iname"]."</td>";
+              echo "<td>".$row["expDate"]."</td>";
+              echo "</tr>";
+              $i = ($i==0) ? 1:0;
+              }
+          } else {
+              echo "0 results";
+          }
 
-						?>
-						
-						<tr>
-							<td>Milk</td>
-							<td>2/20/17</td>
-						</tr>
-							<tr>
-							<td>Bread</td>
-							<td>2/23/17</td>
-						</tr>
-							<tr>
-							<td>Peanut Butter</td>
-							<td>-</td>
-						</tr>
+          ?>
 					</tbody>
 				</table>
 			 </p>
              <p>
 				<button class="btn btn-lg btn-primary" data-toggle="modal" data-target="#addItemModal">Add Item</a>
 				<button class="btn btn-lg btn-primary" data-toggle="modal" data-target="#deleteItemModal">Delete Item</button>
-			</p>  
+			</p>
             </div>
           </div>
         </div>
@@ -162,70 +156,25 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr>
-							<td>Milk and Cereal</td>
-							<td>1</td>
-						</tr>
-						<tr>
-							<td>Chicken and Pasta</td>
-							<td>2.5</td>
-						</tr>
-						<tr>
-							<td>PB&J</td>
-							<td>1</td>
-						</tr>
-						<tr>
-							<td>Blueberry Pancakes</td>
-							<td>2</td>
-						</tr>
-						<tr>
-							<td>Steak and Potatoes</td>
-							<td>3</td>
-						</tr>
-						<tr>
-							<td>Crystal Meth</td>
-							<td>5</td>
-						</tr>
-						<tr>
-							<td>Turkey Dinner</td>
-							<td>4</td>
-						</tr>
-						<tr>
-							<td>Ravioli</td>
-							<td>3</td>
-						</tr>
-						<tr>
-							<td>The Krabby Patty Secret Formula</td>
-							<td>5</td>
-						</tr>
-						<tr>
-							<td>Tuna Fish</td>
-							<td>1.5</td>
-						</tr>
-						<tr>
-							<td>Caeser Salad</td>
-							<td>2</td>
-						</tr>
-						<tr>
-							<td>Pork and Beans</td>
-							<td>3</td>
-						</tr>
-						<tr>
-							<td>Spaghetti</td>
-							<td>2</td>
-						</tr>
-						<tr>
-							<td>Chocolate Milkshake</td>
-							<td>1.5</td>
-						</tr>
-						<tr>
-							<td>Fish Taco</td>
-							<td>2.5</td>
-						</tr>
-						<tr>
-							<td>Apple Pie</td>
-							<td>3.5</td>
-						</tr>
+            <?php
+          $sql = "SELECT rname, difficulty FROM recipie ";
+          $result = mysqli_query($conn, $sql);
+          $i = 0;
+          if (mysqli_num_rows($result) > 0) {
+              // output data of each row
+              while($row = mysqli_fetch_assoc($result)) {
+                  $class = ($i == 0) ? "" : "alt";
+              echo "<tr class=\" ".$class." \">";
+              echo "<td>".$row["rname"]."</td>";
+              echo "<td>".$row["difficulty"]."</td>";
+              echo "</tr>";
+              $i = ($i==0) ? 1:0;
+              }
+          } else {
+              echo "0 results";
+          }
+
+          ?>
 					</tbody>
 				</table>
 			  </p>
@@ -261,13 +210,13 @@
     </div><!-- /.carousel -->
 
     	<!-- Add Item Modal -->
-	<div class="modal fade" id="addItemModal" tabindex="-1" role="dialog" 
+	<div class="modal fade" id="addItemModal" tabindex="-1" role="dialog"
 	     aria-labelledby="myModalLabel" aria-hidden="true">
 	    <div class="modal-dialog">
 	        <div class="modal-content">
 	            <!-- Modal Header -->
 	            <div class="modal-header">
-	                <button type="button" class="close" 
+	                <button type="button" class="close"
 	                   data-dismiss="modal">
 	                       <span aria-hidden="true">&times;</span>
 	                       <span class="sr-only">Close</span>
@@ -283,7 +232,7 @@
 	                    	<label  class="col-sm-2 control-label"
 	                              for="addItemName">Name</label>
 	                    	<div class="col-sm-4">
-	                        	<input class="form-control" 
+	                        	<input class="form-control"
 	                        	id="addItemName" placeholder="Milk, Bread, Meth"/>
 	                    	</div>
 	                    	<label class="col-sm-2 control-label"
@@ -300,7 +249,7 @@
 	                    	<label  class="col-sm-2 control-label"
 	                              for="addItemAmount">Amount</label>
 	                    	<div class="col-sm-4">
-	                        	<input class="form-control" 
+	                        	<input class="form-control"
 	                        	id="addItemAmount" placeholder="1,2,3"/>
 	                    	</div>
 	                    	<label class="col-sm-2 control-label"
@@ -309,7 +258,7 @@
 	                        	<input class="form-control"
 	                            	id="addItemKey" placeholder="Key"/>
 	                    	</div>
-	                 	</div>   
+	                 	</div>
 	               	</form>
 				<br><br><br>
 	            </div>
@@ -326,13 +275,13 @@
 	</div>
 	<!-- END MODAL- Relocate? -->
 	<!-- Delete Item Modal -->
-	<div class="modal fade" id="deleteItemModal" tabindex="-1" role="dialog" 
+	<div class="modal fade" id="deleteItemModal" tabindex="-1" role="dialog"
 	     aria-labelledby="myModalLabel" aria-hidden="true">
 	    <div class="modal-dialog">
 	        <div class="modal-content">
 	            <!-- Modal Header -->
 	            <div class="modal-header">
-	                <button type="button" class="close" 
+	                <button type="button" class="close"
 	                   data-dismiss="modal">
 	                       <span aria-hidden="true">&times;</span>
 	                       <span class="sr-only">Close</span>
@@ -348,7 +297,7 @@
 	                    <label  class="col-sm-2 control-label"
 	                              for="deleteItemName">Name</label>
 	                    <div class="col-sm-4">
-	                        <input class="form-control" 
+	                        <input class="form-control"
 	                        id="deleteItemName" placeholder="Milk, Bread, Meth"/>
 	                    </div>
 	                    <label class="col-sm-2 control-label"
@@ -357,7 +306,7 @@
 	                        <input class="form-control"
 	                            id="deleteItemKey" placeholder="Key"/>
 	                    </div>
-	                 </div>   
+	                 </div>
 	               </form>
 	               <br>
 	            </div>
@@ -391,7 +340,7 @@
    		function deleteRecipeDialog(){
 
    		}
-   		
+
    	</script>
 
 

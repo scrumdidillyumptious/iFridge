@@ -20,7 +20,6 @@ $conn = mysqli_connect($servername, $username, $password, $dbName);
 if (!$conn) {
     die("Connection failed: " . mysqli_connect_error());
 }
-echo "Connected successfully";
 
 ?>
 
@@ -105,7 +104,7 @@ echo "Connected successfully";
               <h1>What's In Your Fridge?</h1>
               <p>
 				<table id=ingTable class="table table-responsive">
-				<thead class="thead-inverse">
+		<thead class="thead-inverse">
 						<tr class = "header">
 							<th>Item</th>
 							<th>Expiration</th>
@@ -135,8 +134,8 @@ echo "Connected successfully";
 				</table>
 			 </p>
              <p>
-				<a class="btn btn-lg btn-primary" href="#" role="button">Add</a>
-				<a class="btn btn-lg btn-primary" href="#" role="button">Delete</a>
+               <button class="btn btn-lg btn-primary" data-toggle="modal" data-target="#addItemModal">Add Item</a>
+               <button class="btn btn-lg btn-primary" data-toggle="modal" data-target="#deleteItemModal">Delete Item</button>
 			</p>
             </div>
           </div>
@@ -178,8 +177,8 @@ echo "Connected successfully";
 				</table>
 			  </p>
               <p>
-				<a class="btn btn-lg btn-primary" href="#" role="button">Add</a>
-				<a class="btn btn-lg btn-primary" href="#" role="button">Delete</a>
+                <a class="btn btn-lg btn-primary" href="#" role="button" onclick="addRecipeDialog();">Add Recipe</a>
+        				<a class="btn btn-lg btn-primary" href="#" role="button" onclick="deleteRecipeDialog();">Delete Recipe</a>
 			  </p>
             </div>
           </div>
@@ -207,6 +206,140 @@ echo "Connected successfully";
         <span class="sr-only">Next</span>
       </a>
     </div><!-- /.carousel -->
+
+    <!-- Add Item Modal -->
+  <div class="modal fade" id="addItemModal" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <button type="button" class="close"
+                   data-dismiss="modal">
+                       <span aria-hidden="true">&times;</span>
+                       <span class="sr-only">Close</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                    Add Item
+                </h4>
+            </div>
+            <!-- Modal Body -->
+            <div class="modal-body">
+                <form  class="form-normal" role="form">
+                    <div class="form-group">
+                      <label  class="col-sm-2 control-label"
+                              for="addItemName">Name</label>
+                      <div class="col-sm-4">
+                          <input class="form-control"
+                          id="addItemName" placeholder="Milk, Bread, Meth"/>
+                      </div>
+                      <label class="col-sm-2 control-label"
+                            for="addItemExp" >Exp. Data</label>
+                      <div class="col-sm-4">
+                          <input class="form-control"
+                              id="addItemExp" placeholder="Expiration"/>
+                      </div>
+                  </div>
+                </form>
+                <br><br><br>
+                <form>
+                  <div class="form-group">
+                      <label  class="col-sm-2 control-label"
+                              for="addItemAmount">Amount</label>
+                      <div class="col-sm-4">
+                          <input class="form-control"
+                          id="addItemAmount" placeholder="1,2,3"/>
+                      </div>
+                      <label class="col-sm-2 control-label"
+                            for="addItemKey" >Key</label>
+                      <div class="col-sm-4">
+                          <input class="form-control"
+                              id="addItemKey" placeholder="Key"/>
+                      </div>
+                  </div>
+                </form>
+      <br><br><br>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default"
+                        data-dismiss="modal" onclick="addItemDialog();">Confirm
+                </button>
+                <button type="button" class="btn btn-default"
+                        data-dismiss="modal">Close
+                </button>
+            </div>
+       </div>
+  </div>
+  </div>
+  <!-- END MODAL- Relocate? -->
+  <!-- Delete Item Modal -->
+  <div class="modal fade" id="deleteItemModal" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <button type="button" class="close"
+                   data-dismiss="modal">
+                       <span aria-hidden="true">&times;</span>
+                       <span class="sr-only">Close</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                    Delete Item
+                </h4>
+            </div>
+            <!-- Modal Body -->
+            <div class="modal-body">
+                <form class="form-normal" role="form">
+                  <div class="form-group">
+                    <label  class="col-sm-2 control-label"
+                              for="deleteItemName">Name</label>
+                    <div class="col-sm-4">
+                        <input class="form-control"
+                        id="deleteItemName" placeholder="Milk, Bread, Meth"/>
+                    </div>
+                    <label class="col-sm-2 control-label"
+                          for="deleteItemKey" >Key</label>
+                    <div class="col-sm-4">
+                        <input class="form-control"
+                            id="deleteItemKey" placeholder="Key"/>
+                    </div>
+                 </div>
+               </form>
+               <br>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default"
+                        data-dismiss="modal" onclick="deleteItemDialog();">Confirm
+                </button>
+                <button type="button" class="btn btn-default"
+                        data-dismiss="modal">Close
+                </button>
+            </div>
+       </div>
+  </div>
+  </div>
+  <!-- END MODAL- Relocate? -->
+
+  <script type="text/JavaScript">
+
+    function addItemDialog(){
+      alert("Item Add Test");
+    }
+
+    function deleteItemDialog(){
+      alert("Item Delete Test");
+    }
+
+    function addRecipeDialog(){
+
+    }
+
+    function deleteRecipeDialog(){
+
+    }
+
+  </script>
 
     <!-- Bootstrap core JavaScript
     ================================================== -->
