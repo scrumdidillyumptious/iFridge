@@ -179,8 +179,8 @@
 				</table>
 			  </p>
               <p>
-				<a class="btn btn-lg btn-primary" href="#" role="button" onclick="addRecipeDialog();">Add Recipe</a>
-				<a class="btn btn-lg btn-primary" href="#" role="button" onclick="deleteRecipeDialog();">Delete Recipe</a>
+				<a class="btn btn-lg btn-primary" data-toggle="modal" data-target="#addRecipeModal">Add Recipe</a>
+				<a class="btn btn-lg btn-primary" data-toggle="modal" data-target="#deleteRecipeModal">Delete Recipe</a>
 			  </p>
             </div>
           </div>
@@ -209,7 +209,7 @@
       </a>
     </div><!-- /.carousel -->
 
-    	<!-- Add Item Modal -->
+    <!-- Add Item Modal -->
 	<div class="modal fade" id="addItemModal" tabindex="-1" role="dialog"
 	     aria-labelledby="myModalLabel" aria-hidden="true">
 	    <div class="modal-dialog">
@@ -242,21 +242,13 @@
 	                            	id="addItemExp" placeholder="Expiration"/>
 	                    	</div>
 	                 	</div>
-	                </form>
 	                <br><br><br>
-	                <form>
 	                 	<div class="form-group">
 	                    	<label  class="col-sm-2 control-label"
 	                              for="addItemAmount">Amount</label>
 	                    	<div class="col-sm-4">
 	                        	<input class="form-control"
 	                        	id="addItemAmount" placeholder="1,2,3"/>
-	                    	</div>
-	                    	<label class="col-sm-2 control-label"
-	                          	for="addItemKey" >Key</label>
-	                    	<div class="col-sm-4">
-	                        	<input class="form-control"
-	                            	id="addItemKey" placeholder="Key"/>
 	                    	</div>
 	                 	</div>
 	               	</form>
@@ -300,12 +292,6 @@
 	                        <input class="form-control"
 	                        id="deleteItemName" placeholder="Milk, Bread, Meth"/>
 	                    </div>
-	                    <label class="col-sm-2 control-label"
-	                          for="deleteItemKey" >Key</label>
-	                    <div class="col-sm-4">
-	                        <input class="form-control"
-	                            id="deleteItemKey" placeholder="Key"/>
-	                    </div>
 	                 </div>
 	               </form>
 	               <br>
@@ -322,23 +308,118 @@
 		</div>
 	</div>
 	<!-- END MODAL- Relocate? -->
+	<!-- Add Recipe Modal -->
+	<div class="modal fade" id="addRecipeModal" tabindex="-1" role="dialog"
+	     aria-labelledby="myModalLabel" aria-hidden="true">
+	    <div class="modal-dialog">
+	        <div class="modal-content">
+	            <!-- Modal Header -->
+	            <div class="modal-header">
+	                <button type="button" class="close"
+	                   data-dismiss="modal">
+	                       <span aria-hidden="true">&times;</span>
+	                       <span class="sr-only">Close</span>
+	                </button>
+	                <h4 class="modal-title" id="myModalLabel">
+	                    Add Recipe
+	                </h4>
+	            </div>
+	            <!-- Modal Body -->
+	            <div class="modal-body">
+	                <form class="form-normal" role="form">
+	                  <div class="form-group">
+	                    <label  class="col-sm-2 control-label"
+	                              for="addRecipeName">Name</label>
+	                    <div class="col-sm-4">
+	                        <input class="form-control"
+	                        id="addRecipeName" placeholder="Krabby Patties"/>
+	                    </div>
+	                 </div>
+	               </form>
+	               <br>
+	            </div>
+	            <div class="modal-footer">
+	                <button type="button" class="btn btn-default"
+	                        data-dismiss="modal" onclick="addRecipeDialog();">Confirm
+	                </button>
+	                <button type="button" class="btn btn-default"
+	                        data-dismiss="modal">Close
+	                </button>
+	            </div>
+	       </div>
+		</div>
+	</div>
+	<!-- END MODAL- Relocate? -->
+	<!-- Delete Recipe Modal -->
+	<div class="modal fade" id="deleteRecipeModal" tabindex="-1" role="dialog"
+	     aria-labelledby="myModalLabel" aria-hidden="true">
+	    <div class="modal-dialog">
+	        <div class="modal-content">
+	            <!-- Modal Header -->
+	            <div class="modal-header">
+	                <button type="button" class="close"
+	                   data-dismiss="modal">
+	                       <span aria-hidden="true">&times;</span>
+	                       <span class="sr-only">Close</span>
+	                </button>
+	                <h4 class="modal-title"  id="myModalLabel">
+	                    Delete Recipe
+	                </h4>
+	            </div>
+	            <!-- Modal Body -->
+	            <div class="modal-body">
+	                <form class="form-normal" role="form">
+	                  <div class="form-group">
+	                    <label  class="col-sm-2 control-label"
+	                              for="deleteRecipeName">Name</label>
+	                    <div class="col-sm-4">
+	                        <input class="form-control"
+	                        id="deleteRecipeName" placeholder="Krabby Patties"/>
+	                    </div>
+	                 </div>
+	               </form>
+	               <br>
+	            </div>
+	            <div class="modal-footer">
+	                <button type="button" class="btn btn-default"
+	                        data-dismiss="modal" onclick="deleteRecipeDialog();">Confirm
+	                </button>
+	                <button type="button" class="btn btn-default"
+	                        data-dismiss="modal">Close
+	                </button>
+	            </div>
+	       </div>
+		</div>
+	</div>
+	<!-- END MODAL- Relocate? -->
+
 
    	<script type="text/JavaScript">
-
+   		//alert popups are for testing form data capture, remove in production
    		function addItemDialog(){
-   			alert("Item Add Test");
+   			alert("You added: " + $('#addItemName').val());
+
+   			localStorage.setItem("addItemName", $('#addItemName').val());
+   			localStorage.setItem("addItemExp", $('#addItemExp').val());
+   			localStorage.setItem("addItemAmount", $('#addItemAmount').val());
    		}
 
    		function deleteItemDialog(){
-   			alert("Item Delete Test");
+   			alert("You deleted:" + $('#deleteItemName').val());
+
+   			localStorage.setItem("deleteItemName", $('#deleteItemName').val());
    		}
 
    		function addRecipeDialog(){
+   			alert("You added: " + $('#addRecipeName').val());
 
+   			localStorage.setItem("addRecipeName", $('#addRecipeName').val());
    		}
 
    		function deleteRecipeDialog(){
+   			alert("You deleted: " + $('#deleteRecipeName').val());
 
+   			localStorage.setItem("deleteRecipeName", $('#deleteRecipeName').val());
    		}
 
    	</script>
