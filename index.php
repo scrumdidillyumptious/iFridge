@@ -177,8 +177,8 @@ if (!$conn) {
 				</table>
 			  </p>
               <p>
-                <a class="btn btn-lg btn-primary" href="#" role="button" onclick="addRecipeDialog();">Add Recipe</a>
-        				<a class="btn btn-lg btn-primary" href="#" role="button" onclick="deleteRecipeDialog();">Delete Recipe</a>
+                <a class="btn btn-lg btn-primary" data-toggle="modal" data-target="#addRecipeModal">Add Recipe</a>
+        				<a class="btn btn-lg btn-primary" data-toggle="modal" data-target="#deleteRecipeModal">Delete Recipe</a>
 			  </p>
             </div>
           </div>
@@ -225,7 +225,7 @@ if (!$conn) {
             </div>
             <!-- Modal Body -->
             <div class="modal-body">
-                <form  class="form-normal" role="form">
+                <form action="addIng.php" class="form-normal" role="form" method="post">
                     <div class="form-group">
                       <label  class="col-sm-2 control-label"
                               for="addItemName">Name</label>
