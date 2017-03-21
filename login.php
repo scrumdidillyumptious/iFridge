@@ -1,3 +1,8 @@
+<?php
+session_start();
+if($_SESSION['username'])
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -15,7 +20,7 @@
     <link href="Bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]> 
+    <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
@@ -25,7 +30,7 @@
   <body>
     <div class="navbar-wrapper">
       <div class="container">
-        <nav class="navbar navbar-inverse navbar-static-top">
+        <nav class="navbar navbar-inverse navbar-fixed-top">
           <div class="container">
             <div class="navbar-header">
               <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -50,9 +55,9 @@
     <div class="row">
     	<div class="col-md-4"></div>
 	    <div class="container well col-md-4">
-	      <form class="form-signin">
+	      <form class="form-signin" action="welcome.php" method = "post">
 	        <h2 class="form-signin-heading">Please sign in</h2>
-	        <label for="inputEmail" class="sr-only">Email address</label>
+	        <label for="inputEmail" class="sr-only">Username</label>
 	        <input name="emailBox" type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
 	        <label for="inputPassword" class="sr-only">Password</label>
 	        <input name="passwordBox" type="password" id="inputPassword" class="form-control" placeholder="Password" required>
@@ -60,8 +65,9 @@
 	          <label>
 	            <input type="checkbox" value="remember-me"> Remember me
 	          </label>
+            <input type=submit/>
 	        </div>
-	        <button class="btn btn-lg btn-primary btn-block" type="button" onclick="formHandler();">Sign in</button>
+	        <button class="btn btn-lg btn-primary btn-block" type="submit" onclick="formHandler();">Sign in</button>
 	      </form>
 
 	    </div>
@@ -85,13 +91,20 @@
    			//alert(dataObj['passwordBox']);  //print input password
 
    			//send input email to database (dataObj['emailBox']), return correctPass
-   			var correctPass = ""; //database connection here to return registered password
+   			var correctPass = "readCorrectPasswordFromDatabase"; //database connection here to return registered password
 
    			if(dataObj['passwordBox'] == correctPass){
-   				window.location = "home.html";
+          <?php
+print_r($_SESSION);
+?>
+   				window.location = "home.php";
    			}
    			else{
-   				window.location = "login.html";
+          <?php
+print_r($_SESSION);
+?>
+   				alert("Password Incorrect");
+   				window.location = "login.php";
    			}
 
    		}
