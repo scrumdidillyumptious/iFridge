@@ -1,4 +1,9 @@
 <!DOCTYPE html>
+<?php
+$cookie_value=4;
+$cookie_name="user";
+setcookie($cookie_name, $cookie_value)
+?>
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -20,10 +25,6 @@ $conn = mysqli_connect($servername, $username, $password, $dbName);
 if (!$conn) {
     die("Connection failed: " . mysqli_connect_error());
 }
-<<<<<<< HEAD
-echo "Connected successfully";
-=======
->>>>>>> origin/master
 
 ?>
 
@@ -108,11 +109,7 @@ echo "Connected successfully";
               <h1>What's In Your Fridge?</h1>
               <p>
 				<table id=ingTable class="table table-responsive">
-<<<<<<< HEAD
-				<thead class="thead-inverse">
-=======
 		<thead class="thead-inverse">
->>>>>>> origin/master
 						<tr class = "header">
 							<th>Item</th>
 							<th>Expiration</th>
@@ -120,7 +117,8 @@ echo "Connected successfully";
 					</thead>
 					<tbody>
               <?php
-            $sql = "SELECT iname, expDate FROM ingredients";
+
+            $sql = "SELECT iname, expDate FROM ingredients WHERE users_userid=4";
             $result = mysqli_query($conn, $sql);
             $i = 0;
             if (mysqli_num_rows($result) > 0) {
@@ -142,13 +140,8 @@ echo "Connected successfully";
 				</table>
 			 </p>
              <p>
-<<<<<<< HEAD
-				<a class="btn btn-lg btn-primary" href="#" role="button">Add</a>
-				<a class="btn btn-lg btn-primary" href="#" role="button">Delete</a>
-=======
                <button class="btn btn-lg btn-primary" data-toggle="modal" data-target="#addItemModal">Add Item</a>
                <button class="btn btn-lg btn-primary" data-toggle="modal" data-target="#deleteItemModal">Delete Item</button>
->>>>>>> origin/master
 			</p>
             </div>
           </div>
@@ -190,13 +183,8 @@ echo "Connected successfully";
 				</table>
 			  </p>
               <p>
-<<<<<<< HEAD
-				<a class="btn btn-lg btn-primary" href="#" role="button">Add</a>
-				<a class="btn btn-lg btn-primary" href="#" role="button">Delete</a>
-=======
                 <a class="btn btn-lg btn-primary" data-toggle="modal" data-target="#addRecipeModal">Add Recipe</a>
         				<a class="btn btn-lg btn-primary" data-toggle="modal" data-target="#deleteRecipeModal">Delete Recipe</a>
->>>>>>> origin/master
 			  </p>
             </div>
           </div>
@@ -225,8 +213,6 @@ echo "Connected successfully";
       </a>
     </div><!-- /.carousel -->
 
-<<<<<<< HEAD
-=======
     <!-- Add Item Modal -->
   <div class="modal fade" id="addItemModal" tabindex="-1" role="dialog"
      aria-labelledby="myModalLabel" aria-hidden="true">
@@ -251,44 +237,43 @@ echo "Connected successfully";
                               for="addItemName">Name</label>
                       <div class="col-sm-4">
                           <input class="form-control"
-                          id="addItemName" placeholder="Milk, Bread, Meth"/>
+                          id="addItemName" type="text" name="addItemName"placeholder="Milk, Bread, Meth"/>
                       </div>
                       <label class="col-sm-2 control-label"
                             for="addItemExp" >Exp. Data</label>
                       <div class="col-sm-4">
                           <input class="form-control"
-                              id="addItemExp" placeholder="Expiration"/>
+                              id="addItemExp" type="text" name="addItemExp" placeholder="Expiration"/>
                       </div>
                   </div>
-                </form>
-                <br><br><br>
-                <form>
                   <div class="form-group">
                       <label  class="col-sm-2 control-label"
                               for="addItemAmount">Amount</label>
                       <div class="col-sm-4">
-                          <input class="form-control"
-                          id="addItemAmount" placeholder="1,2,3"/>
+                          <input type="text" class="form-control" name="addItemAmount"
+                          id="addItemAmount"type="text" placeholder="1,2,3"/>
                       </div>
                       <label class="col-sm-2 control-label"
                             for="addItemKey" >Key</label>
                       <div class="col-sm-4">
                           <input class="form-control"
-                              id="addItemKey" placeholder="Key"/>
+                              id="addItemKey" type="text" name="addItemKey" placeholder="Key"/>
                       </div>
                   </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-default"
+                            data-dismiss="
+                            modal" onclick="welcome.php">Confirm
+                    </button>
+                    <button type="button" class="btn btn-default"
+                            data-dismiss="modal">Close
+                    </button>
+                </div>
+           </div>
                 </form>
       <br><br><br>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default"
-                        data-dismiss="modal" onclick="addItemDialog();">Confirm
-                </button>
-                <button type="button" class="btn btn-default"
-                        data-dismiss="modal">Close
-                </button>
-            </div>
-       </div>
+
   </div>
   </div>
   <!-- END MODAL- Relocate? -->
@@ -310,33 +295,36 @@ echo "Connected successfully";
             </div>
             <!-- Modal Body -->
             <div class="modal-body">
-                <form class="form-normal" role="form">
+                <form action=removeIng.php method="post" class="form-normal" role="form">
                   <div class="form-group">
                     <label  class="col-sm-2 control-label"
                               for="deleteItemName">Name</label>
                     <div class="col-sm-4">
-                        <input class="form-control"
+                        <input name="deleteItemName" class="form-control"
                         id="deleteItemName" placeholder="Milk, Bread, Meth"/>
                     </div>
                     <label class="col-sm-2 control-label"
                           for="deleteItemKey" >Key</label>
                     <div class="col-sm-4">
                         <input class="form-control"
-                            id="deleteItemKey" placeholder="Key"/>
+                            id="deleteItemKey" name="deleteItemKey" placeholder="Key"/>
+                            <br>
+                            
+                         </div>
+                         <div class="modal-footer">
+                           <button type="submit" class="btn btn-default"
+                                   data-dismiss="
+                                   modal" onclick="removeIng.php">Confirm
+                           </button>
+                             <button type="button" class="btn btn-default"
+                                     data-dismiss="modal">Close
+                             </button>
+                         </div>
+                    </div>
                     </div>
                  </div>
                </form>
-               <br>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default"
-                        data-dismiss="modal" onclick="deleteItemDialog();">Confirm
-                </button>
-                <button type="button" class="btn btn-default"
-                        data-dismiss="modal">Close
-                </button>
-            </div>
-       </div>
+
   </div>
   </div>
   <!-- END MODAL- Relocate? -->
@@ -361,7 +349,6 @@ echo "Connected successfully";
 
   </script>
 
->>>>>>> origin/master
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->

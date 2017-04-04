@@ -12,9 +12,7 @@ table {
 		margin: auto;
 		overflow-x: auto;
 		overflow-y: auto;
-		display: inline-block;
-
-		
+		display: inline-block;		
     }
 
 thead, tbody, tr, td, th { display: block; }
@@ -24,15 +22,12 @@ tr:after {
     display: block;
     visibility: hidden;
     clear: both;
-	
 }
 
 thead th {
     height: 30px;
     text-align: center;
 	font-size: 16pt; 
-
-	
 }
 
 tbody {
@@ -40,7 +35,6 @@ tbody {
     overflow-y: auto;
 	text-align: center;
 	font-size: 16pt; 
-
 }
 
 thead {
@@ -52,7 +46,6 @@ tbody td, thead th {
     width: 50%;
     float: left;	
 	text-align: center;
-
 }
 
 
@@ -73,13 +66,13 @@ tbody td, thead th {
     display: inline-block;
     float:none;
 }
+
 .navbar-wrapper {
   position: absolute;
   top: 0;
   right: 0;
   left: 0;
   z-index: 20;
-
 }
 
 /* Flip around the padding for proper display in narrow viewports */
