@@ -22,6 +22,8 @@
 		echo "Connected successfully";
 
 		$itemsQuery = mysql_query("select * from ingredients");
+		$recipesQuery = mysql_query("select * from recipes");
+
 
 	?>
 	
@@ -47,7 +49,7 @@
   <body>
     <div class="navbar-wrapper">
       <div class="container">
-        <nav class="navbar navbar-inverse navbar-static-top">
+        <nav class="navbar navbar-inverse navbar-fixed-top">
           <div class="container">
             <div class="navbar-header">
               <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -56,10 +58,11 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
               </button>
-              <a class="navbar-brand" href="home.html">iFridge</a>
             </div>
             <div id="navbar" class="navbar-collapse collapse">
               <ul class="nav navbar-nav">
+			    <li class="navbar-brand" style="size:150%" href="home.html">iFridge</li>
+
                 <li class="active"><a href="home.html">Home</a></li>
                 <li><a href="about.html">About</a></li>
 				<li><a href="settings.html">Settings</a></li>
@@ -72,19 +75,19 @@
                     <li><a href="#">Difficulty</a></li>
                   </ul>
                 </li>
-				<li><a href="login.html">Logout</a></li>
-				<form class="navbar-form navbar-right" role="search">
-					<div class="form-group">
-						<input type="text" class="form-control" placeholder="Search">
-					</div>
-					<button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button>
-				</form>
-
+				<li class="navbar-right"><a href="login.html">Logout</a></li>
+				<li class="navbar-right">
+					<form class="navbar-form " role="search">
+						<div class="form-group">
+							<input type="text" class="form-control" placeholder="Search">
+						</div>
+						<button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button>
+					</form>
+				</li>
               </ul>
             </div>
           </div>
         </nav>
-
       </div>
     </div>
 
@@ -105,7 +108,7 @@
             <div class="carousel-caption">
               <h1>What's In Your Fridge?</h1>
               <p>
-				<table class="table table-responsive">
+				<table class="table table-responsive";>
 					<thead class="thead-inverse">
 						<tr class = "header">
 							<th>Item</th>
@@ -113,6 +116,7 @@
 						</tr>
 					</thead>
 					<tbody>
+
 						<?php
 							$i = 0;
 							while ($row = mysql_fetch_array($itemsQuery)) {
@@ -123,7 +127,6 @@
 								echo "</tr>";
 								$i = ($i==0) ? 1:0;
 							}
-
 						?>
 						
 						<tr>
@@ -142,8 +145,8 @@
 				</table>
 			 </p>
              <p>
-				<a class="btn btn-lg btn-primary" href="#" role="button">Add</a>
-				<a class="btn btn-lg btn-primary" href="#" role="button">Delete</a>
+				<button class="btn btn-lg btn-primary" data-toggle="modal" data-target="#addItemModal">Add Item</a>
+				<button class="btn btn-lg btn-primary" data-toggle="modal" data-target="#deleteItemModal">Delete Item</button>
 			</p>  
             </div>
           </div>
@@ -156,12 +159,24 @@
               <p>
 				<table class="table table-responsive">
 					<thead class="thead-inverse">
-						<tr>
+						<tr class = "header">
 							<th>Recipe</th>
 							<th>Difficulty</th>
 						</tr>
 					</thead>
 					<tbody>
+						<?php
+							$i = 0;
+							while ($row = mysql_fetch_array($recipesQuery)) {
+								$class = ($i == 0) ? "" : "alt";
+								echo "<tr class=\"".$class."\">";
+								echo "<td>".$row[rname]."</td>";
+								echo "<td>".$row[difficulty]."</td>";
+								echo "</tr>";
+								$i = ($i==0) ? 1:0;
+							}
+
+						?>
 						<tr>
 							<td>Milk and Cereal</td>
 							<td>1</td>
@@ -230,8 +245,8 @@
 				</table>
 			  </p>
               <p>
-				<a class="btn btn-lg btn-primary" href="#" role="button">Add</a>
-				<a class="btn btn-lg btn-primary" href="#" role="button">Delete</a>
+				<a class="btn btn-lg btn-primary" href="#" role="button" onclick="addRecipeDialog();">Add Recipe</a>
+				<a class="btn btn-lg btn-primary" href="#" role="button" onclick="deleteRecipeDialog();">Delete Recipe</a>
 			  </p>
             </div>
           </div>
@@ -243,8 +258,8 @@
 				<h1>What's On Your Shopping List?</h1>
 				<p>Feature Coming Soon!</p>
 				<p>
-					<a class="btn btn-lg btn-primary" href="#" role="button">Add</a>
-					<a class="btn btn-lg btn-primary" href="#" role="button">Delete</a>
+					<!--<a class="btn btn-lg btn-primary" href="#" role="button">Add</a>
+					<a class="btn btn-lg btn-primary" href="#" role="button">Delete</a> -->
 				</p>
             </div>
           </div>
@@ -259,6 +274,142 @@
         <span class="sr-only">Next</span>
       </a>
     </div><!-- /.carousel -->
+
+    	<!-- Add Item Modal -->
+	<div class="modal fade" id="addItemModal" tabindex="-1" role="dialog" 
+	     aria-labelledby="myModalLabel" aria-hidden="true">
+	    <div class="modal-dialog">
+	        <div class="modal-content">
+	            <!-- Modal Header -->
+	            <div class="modal-header">
+	                <button type="button" class="close" 
+	                   data-dismiss="modal">
+	                       <span aria-hidden="true">&times;</span>
+	                       <span class="sr-only">Close</span>
+	                </button>
+	                <h4 class="modal-title" id="myModalLabel">
+	                    Add Item
+	                </h4>
+	            </div>
+	            <!-- Modal Body -->
+	            <div class="modal-body">
+	                <form class="form-normal" role="form">
+	                  	<div class="form-group">
+	                    	<label  class="col-sm-2 control-label"
+	                              for="addItemName">Name</label>
+	                    	<div class="col-sm-4">
+	                        	<input class="form-control" 
+	                        	id="addItemName" placeholder="Milk, Bread, Meth"/>
+	                    	</div>
+	                    	<label class="col-sm-2 control-label"
+	                          	for="addItemExp" >Exp. Data</label>
+	                    	<div class="col-sm-4">
+	                        	<input class="form-control"
+	                            	id="addItemExp" placeholder="Expiration"/>
+	                    	</div>
+	                 	</div>
+	                </form>
+	                <br><br><br>
+	                <form>
+	                 	<div class="form-group">
+	                    	<label  class="col-sm-2 control-label"
+	                              for="addItemAmount">Amount</label>
+	                    	<div class="col-sm-4">
+	                        	<input class="form-control" 
+	                        	id="addItemAmount" placeholder="1,2,3"/>
+	                    	</div>
+	                    	<label class="col-sm-2 control-label"
+	                          	for="addItemKey" >Key</label>
+	                    	<div class="col-sm-4">
+	                        	<input class="form-control"
+	                            	id="addItemKey" placeholder="Key"/>
+	                    	</div>
+	                 	</div>   
+	               	</form>
+				<br><br><br>
+	            </div>
+	            <div class="modal-footer">
+	                <button type="button" class="btn btn-default"
+	                        data-dismiss="modal" onclick="addItemDialog();">Confirm
+	                </button>
+	                <button type="button" class="btn btn-default"
+	                        data-dismiss="modal">Close
+	                </button>
+	            </div>
+	       </div>
+		</div>
+	</div>
+	<!-- END MODAL- Relocate? -->
+	<!-- Delete Item Modal -->
+	<div class="modal fade" id="deleteItemModal" tabindex="-1" role="dialog" 
+	     aria-labelledby="myModalLabel" aria-hidden="true">
+	    <div class="modal-dialog">
+	        <div class="modal-content">
+	            <!-- Modal Header -->
+	            <div class="modal-header">
+	                <button type="button" class="close" 
+	                   data-dismiss="modal">
+	                       <span aria-hidden="true">&times;</span>
+	                       <span class="sr-only">Close</span>
+	                </button>
+	                <h4 class="modal-title" id="myModalLabel">
+	                    Delete Item
+	                </h4>
+	            </div>
+	            <!-- Modal Body -->
+	            <div class="modal-body">
+	                <form class="form-normal" role="form">
+	                  <div class="form-group">
+	                    <label  class="col-sm-2 control-label"
+	                              for="deleteItemName">Name</label>
+	                    <div class="col-sm-4">
+	                        <input class="form-control" 
+	                        id="deleteItemName" placeholder="Milk, Bread, Meth"/>
+	                    </div>
+	                    <label class="col-sm-2 control-label"
+	                          for="deleteItemKey" >Key</label>
+	                    <div class="col-sm-4">
+	                        <input class="form-control"
+	                            id="deleteItemKey" placeholder="Key"/>
+	                    </div>
+	                 </div>   
+	               </form>
+	               <br>
+	            </div>
+	            <div class="modal-footer">
+	                <button type="button" class="btn btn-default"
+	                        data-dismiss="modal" onclick="deleteItemDialog();">Confirm
+	                </button>
+	                <button type="button" class="btn btn-default"
+	                        data-dismiss="modal">Close
+	                </button>
+	            </div>
+	       </div>
+		</div>
+	</div>
+	<!-- END MODAL- Relocate? -->
+
+   	<script type="text/JavaScript">
+
+   		function addItemDialog(){
+   			alert("Item Add Test");
+   		}
+
+   		function deleteItemDialog(){
+   			alert("Item Delete Test");
+   		}
+
+   		function addRecipeDialog(){
+
+   		}
+
+   		function deleteRecipeDialog(){
+
+   		}
+   		
+   	</script>
+
+
 
     <!-- Bootstrap core JavaScript
     ================================================== -->

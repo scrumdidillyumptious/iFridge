@@ -13,6 +13,8 @@ table {
 		overflow-x: auto;
 		overflow-y: auto;
 		display: inline-block;
+
+		
     }
 
 thead, tbody, tr, td, th { display: block; }
@@ -22,17 +24,22 @@ tr:after {
     display: block;
     visibility: hidden;
     clear: both;
+	
 }
 
 thead th {
     height: 30px;
     text-align: center;
+	font-size: 16pt; 
+
+	
 }
 
 tbody {
     height: 450px;
     overflow-y: auto;
 	text-align: center;
+	font-size: 16pt; 
 
 }
 
@@ -53,12 +60,26 @@ tbody td, thead th {
 -------------------------------------------------- */
 
 /* Special class on .container surrounding .navbar, used for positioning it into place. */
+
+.navbar-nav {
+	font-size: 16pt; 
+    float:none;
+    margin:0 auto;
+    display: block;
+    text-align: center;
+}
+
+.navbar-nav > li {
+    display: inline-block;
+    float:none;
+}
 .navbar-wrapper {
   position: absolute;
   top: 0;
   right: 0;
   left: 0;
   z-index: 20;
+
 }
 
 /* Flip around the padding for proper display in narrow viewports */
@@ -71,7 +92,7 @@ tbody td, thead th {
   padding-left: 15px;
 }
 .navbar-wrapper .navbar .container {
-  width: auto;
+  width: middle;
 }
 
 
